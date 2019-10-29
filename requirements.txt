@@ -1,3 +1,4 @@
 gym[atari]
 gym[classic_control]
 gym[box2d]
+pyvirtualdisplay
