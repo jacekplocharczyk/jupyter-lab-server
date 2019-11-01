@@ -2,6 +2,8 @@ version: '2.3'
 volumes:
   jupyter-settings:
     driver: local
+  vs-code-settings:
+    driver: local
 
 services:
   jupyter-lab:
@@ -18,3 +20,4 @@ services:
       - /home/${USER}/.ssh:/root/.ssh
       - /home/${USER}/.gitconfig:/root/.gitconfig
       - jupyter-settings:/root/.jupyter/
+      - vs-code-settings:/root/.vscode-server
