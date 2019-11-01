@@ -1,14 +1,17 @@
-version: '2.1'
+version: '2.3'
 volumes:
   jupyter-settings:
     driver: local
 
 services:
   jupyter-lab:
-    image: jacekplocharczyk/jupyter:gpu
+    image: jacekplocharczyk/jupyter:cuda
     restart: always
+    runtime: nvidia
     ports:
       - 8889:8889
+      - 6006:6006
+      - 6005:8888
     volumes:
       - /home/${USER}/projects/:/projects/
       - /home/${USER}/.kaggle/:/root/.kaggle/

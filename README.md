@@ -37,17 +37,26 @@ If you want to use your CUDA-capable GPU in computations:
     $ sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
     $ sudo systemctl restart docker   
     ```
+    
+    # Add nvida runtime to the docker-compose
+    Edit `/etc/docker/daemon.json` by adding:
+    ```
+    {
+        "runtimes": {
+            "nvidia": {
+               "path": "nvidia-container-runtime",
+               "runtimeArgs": []
+            }
+        }
+    }
+    ``` 
+
 
     In case of `docker: Error response from daemon: Unknown runtime specified nvidia.` run:
     ```bash
     $ sudo systemctl daemon-reload
     $ sudo systemctl restart docker
     ```
-
-
-2. Run `set_up_gpu.sh` to set up local storage for the jupyter configuration  
-   (docker-compose isn't compatible with using GPUs inside the docker container)
-
 
 ### SSL configuration
 To add SSL encryption you can use self-signed certificate as follows:
@@ -69,9 +78,8 @@ To add SSL encryption you can use self-signed certificate as follows:
 Everything will be perserved because of the jupyter `jupyter-gpu-config` volume.
 
 ## Start the container
-To start run `docker-compose up -d` in the repo directory. (Non-CUDA Version)  
+To start run `docker-compose up -d` in the repo directory.
 
-To start CUDA version run `./run_on_gpu.sh`
 
 ## Access the jupyter-lab
 Jupyter-lab can be found under the following path http://localhost:8889/
